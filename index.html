@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbot Prototype Usability Evaluation Questionnaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f1f3d;
+    --navy-mid: #1a3560;
+    --accent: #2563eb;
+    --accent-light: #dbeafe;
+    --accent-hover: #1d4ed8;
+    --success: #16a34a;
+    --error: #dc2626;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--navy);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .topbar-brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .topbar-logo {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: white; font-size: 13px; letter-spacing: 0.5px;
+  }
+  .topbar-university {
+    color: #bfdbfe;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1;
+    width: fit-content;
+  }
+  .topbar-university:hover { color: white; }
+  .topbar-title {
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.9;
+    letter-spacing: 0.3px;
+  }
+  .lang-toggle {
+    display: flex;
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .lang-btn {
+    padding: 6px 14px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.8px;
+    transition: all 0.2s;
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    color: white;
+  }
+  .lang-btn:hover:not(.active) { color: white; background: rgba(255,255,255,0.1); }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: sticky;
+    top: 56px;
+    z-index: 95;
+    overflow: hidden;
+  }
+  .progress-bar-track {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #60a5fa);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 36px;
+    text-align: right;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(37,99,235,0.3);
+    border: 1px solid rgba(37,99,235,0.5);
+    color: #93c5fd;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    color: white;
+    font-size: clamp(22px, 4vw, 32px);
+    line-height: 1.25;
+    max-width: 680px;
+    margin: 0 auto 16px;
+    font-weight: 400;
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+    max-width: 560px;
+    margin: 0 auto 24px;
+    line-height: 1.7;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 14px;
+    margin: 18px auto 0;
+    color: #dbeafe;
+    font-size: 12px;
+    line-height: 1.6;
+    max-width: 760px;
+  }
+  .hero-meta a {
+    color: #93c5fd;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .hero-meta a:hover { text-decoration: underline; }
+  .chatbot-link-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 10px 18px;
+    color: #93c5fd;
+    font-size: 13px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .chatbot-link-box:hover { background: rgba(255,255,255,0.14); }
+  .chatbot-link-box svg { flex-shrink: 0; }
+
+  /* ── CONSENT ── */
+  .consent-banner {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    margin: 24px auto;
+    max-width: 760px;
+    padding: 14px 18px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .consent-banner svg { flex-shrink: 0; margin-top: 2px; }
+  .consent-banner p { font-size: 13px; color: var(--navy); line-height: 1.6; }
+  .consent-check-row {
+    max-width: 760px;
+    margin: 0 auto 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 0 0 4px;
+  }
+  .consent-check-row input[type="checkbox"] {
+    width: 18px; height: 18px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .consent-check-row label { font-size: 13px; color: var(--text); cursor: pointer; line-height: 1.5; }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 16px 64px;
+  }
+
+  /* ── SECTION CARD ── */
+  .section-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .section-header {
+    background: var(--navy);
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-num {
+    width: 26px; height: 26px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: white;
+    flex-shrink: 0;
+  }
+  .section-title {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .section-body { padding: 22px; }
+
+  /* ── QUESTION ── */
+  .question-block {
+    margin-bottom: 24px;
+  }
+  .question-block:last-child { margin-bottom: 0; }
+  .q-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .q-label .req { color: var(--error); margin-left: 3px; }
+
+  /* Radio / Checkbox groups */
+  .radio-group, .check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .radio-group label, .check-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .radio-group label:hover, .check-group label:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+  .radio-group input, .check-group input {
+    accent-color: var(--accent);
+    width: 16px; height: 16px;
+    flex-shrink: 0;
+  }
+  .radio-group label:has(input:checked),
+  .check-group label:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  /* Likert scale */
+  .likert-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .likert-table thead th {
+    padding: 8px 6px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    border-bottom: 2px solid var(--border);
+  }
+  .likert-table thead th.col-stmt {
+    text-align: left;
+    width: 46%;
+  }
+  .likert-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .likert-table tbody tr:last-child { border-bottom: none; }
+  .likert-table tbody tr:hover { background: #f8fafc; }
+  .likert-table tbody td {
+    padding: 11px 6px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .likert-table tbody td.stmt-cell {
+    text-align: left;
+    padding-right: 12px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--text);
+  }
+  .likert-table tbody td input[type="radio"] {
+    accent-color: var(--accent);
+    width: 16px; height: 16px;
+    cursor: pointer;
+  }
+
+  /* Mobile likert fallback */
+  @media (max-width: 560px) {
+    .likert-table thead { display: none; }
+    .likert-table tbody tr {
+      display: block;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .likert-table tbody td { display: block; text-align: left; padding: 2px 0; }
+    .likert-table tbody td.stmt-cell {
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .likert-table tbody td::before {
+      content: attr(data-label) " ";
+      font-size: 11px;
+      color: var(--text-muted);
+      display: inline-block;
+      width: 130px;
+    }
+    .likert-mobile-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .likert-mobile-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    .likert-mobile-item input { width: 18px; height: 18px; }
+  }
+
+  /* Star rating */
+  .star-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .star-option { display: none; }
+  .star-label {
+    font-size: 28px;
+    cursor: pointer;
+    color: #cbd5e1;
+    transition: color 0.15s, transform 0.1s;
+    line-height: 1;
+  }
+  .star-label:hover,
+  .star-label:hover ~ .star-label { color: #f59e0b; }
+  .star-option:checked ~ .star-label { color: #f59e0b; }
+  .star-group { display: flex; flex-direction: row-reverse; gap: 4px; }
+  .star-group .star-label:hover,
+  .star-group .star-label:hover ~ .star-label,
+  .star-group .star-option:checked ~ .star-label { color: #f59e0b; }
+  .star-value-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-left: 6px;
+  }
+
+  /* Textarea */
+  textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    resize: vertical;
+    min-height: 90px;
+    transition: border-color 0.2s;
+    background: var(--white);
+  }
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+  }
+  textarea.optional { background: #fafafa; }
+
+  /* Divider */
+  .q-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 20px 0;
+  }
+
+  /* ── ERROR MESSAGES ── */
+  .field-error {
+    display: none;
+    color: var(--error);
+    font-size: 12px;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .field-error.visible { display: flex !important; }
+  .form-error-banner {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    color: var(--error);
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .form-error-banner.visible { display: block; }
+
+  /* ── SUBMIT AREA ── */
+  .submit-area {
+    text-align: center;
+    margin-top: 8px;
+  }
+  .btn-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 14px 48px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+    letter-spacing: 0.2px;
+  }
+  .btn-submit:hover:not(:disabled) {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(37,99,235,0.4);
+  }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  /* ── SUCCESS ── */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 64px 24px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .success-screen.visible { display: block; }
+  .success-icon {
+    width: 64px; height: 64px;
+    background: #dcfce7;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .success-screen h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--navy);
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+  .success-screen p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  .form-footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    background: var(--white);
+    margin-top: 40px;
+  }
+
+  /* ── HIGHLIGHT ERRORS ── */
+  .has-error .radio-group label,
+  .has-error .check-group label {
+    border-color: #fca5a5;
+  }
+  .has-error textarea {
+    border-color: var(--error);
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 32px 16px 28px; }
+    .section-body { padding: 16px; }
+    .topbar-brand-text { gap: 0; }
+    .topbar-university { font-size: 10px; }
+    .topbar-title {
+      display: block;
+      font-size: 11px;
+      line-height: 1.4;
+      max-width: 190px;
+    }
+    .progress-wrap {
+      top: 60px;
+      padding: 10px 16px;
+    }
+    .btn-submit { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-logo">CP</div>
+    <div class="topbar-brand-text">
+      <a class="topbar-university" href="https://www.berlinsbi.com/" target="_blank" rel="noopener">BSBI University</a>
+      <span class="topbar-title" data-en="MSc Artificial Intelligence Dissertation · Chatbot Prototype Study" data-de="MSc Künstliche Intelligenz Dissertation · Chatbot-Prototyp-Studie">MSc Artificial Intelligence Dissertation · Chatbot Prototype Study</span>
+    </div>
+  </div>
+  <div class="lang-toggle" role="group" aria-label="Language selector">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">EN</button>
+    <button class="lang-btn" id="btn-de" onclick="setLang('de')" aria-pressed="false">DE</button>
+  </div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <div class="progress-bar-track">
+    <div class="progress-bar-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-label" id="progress-label">0%</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow" data-en="Academic Research · Anonymised" data-de="Akademische Forschung · Anonymisiert">Academic Research · Anonymised</div>
+  <h1 data-en="Usability Evaluation Questionnaire for the Chatbot Prototype" data-de="Usability-Evaluierungsfragebogen für den Chatbot-Prototyp">Usability Evaluation Questionnaire for the Chatbot Prototype</h1>
+  <p class="hero-sub" data-en="This questionnaire is part of an MSc Artificial Intelligence dissertation evaluating the usability and decision-support capability of a chatbot prototype. Responses will be anonymised and used only for academic analysis." data-de="Dieser Fragebogen ist Teil einer MSc-Dissertation im Bereich Künstliche Intelligenz und bewertet die Benutzerfreundlichkeit und Entscheidungsunterstützung eines Chatbot-Prototyps. Alle Antworten werden anonymisiert und nur für akademische Analysen verwendet.">This questionnaire is part of an MSc Artificial Intelligence dissertation evaluating the usability and decision-support capability of a chatbot prototype. Responses will be anonymised and used only for academic analysis.</p>
+  <a href="https://your-chatbot-link.com" class="chatbot-link-box" id="chatbot-link" target="_blank" rel="noopener">
+    <svg width="16" height="16" fill="none" stroke="#93c5fd" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    <span data-en="Open the Chatbot Prototype to complete test scenarios" data-de="Öffnen Sie den Chatbot-Prototypen, um Testszenarien durchzuführen">Open the Chatbot Prototype to complete test scenarios</span>
+  </a>
+  <div class="hero-meta" data-en="University Dissertation · Kumar Viswajeet · Supervisor: Dr Vincent English · Subject: MSc Artificial Intelligence" data-de="Universitätsdissertation · Kumar Viswajeet · Betreuer: Dr Vincent English · Studiengang: MSc Künstliche Intelligenz">University Dissertation · Kumar Viswajeet · Supervisor: Dr Vincent English · Subject: MSc Artificial Intelligence</div>
+</div>
+
+<main>
+
+  <!-- CONSENT -->
+  <div class="consent-banner" role="note">
+    <svg width="18" height="18" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
+    <p data-en="Please access the chatbot prototype using the link above, complete the provided test scenarios, and then answer the questionnaire based on your experience." data-de="Bitte öffnen Sie den Chatbot-Prototypen über den Link oben, führen Sie die vorgesehenen Testszenarien durch und beantworten Sie anschließend den Fragebogen basierend auf Ihrer Erfahrung.">Please access the chatbot prototype using the link above, complete the provided test scenarios, and then answer the questionnaire based on your experience.</p>
+  </div>
+
+  <div class="consent-check-row">
+    <input type="checkbox" id="consent-cb" onchange="updateProgress()">
+    <label for="consent-cb" data-en="I understand that this questionnaire is for academic research purposes only and that my responses will be anonymised." data-de="Ich verstehe, dass dieser Fragebogen ausschließlich für akademische Forschungszwecke verwendet wird und meine Antworten anonymisiert werden.">I understand that this questionnaire is for academic research purposes only and that my responses will be anonymised.</label>
+  </div>
+  <div class="field-error" id="err-consent">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
+    <span data-en="Please confirm your consent to proceed." data-de="Bitte bestätigen Sie Ihre Einwilligung, um fortzufahren.">Please confirm your consent to proceed.</span>
+  </div>
+
+  <form id="scarp-form" novalidate>
+    <input type="hidden" id="field-lang" name="language">
+    <input type="hidden" id="field-ts" name="timestamp">
+
+    <!-- SECTION 1: Background -->
+    <div class="section-card" id="sec1">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div class="section-title" data-en="Participant Background" data-de="Hintergrund der Teilnehmenden">Participant Background</div>
+      </div>
+      <div class="section-body">
+
+        <!-- Q1 -->
+        <div class="question-block" id="qb-q1">
+          <label class="q-label" for="q1">
+            <span data-en="Q1. What is your general background?" data-de="F1. Was ist Ihr allgemeiner Hintergrund?">Q1. What is your general background?</span>
+            <span class="req">*</span>
+          </label>
+          <div class="radio-group" id="q1-group">
+            <label><input type="radio" name="q1" value="Health & Safety Professional" onchange="updateProgress()"> <span data-en="Health &amp; Safety Professional" data-de="Fachkraft für Gesundheitsschutz und Sicherheit">Health &amp; Safety Professional</span></label>
+            <label><input type="radio" name="q1" value="Engineer / Technical Specialist" onchange="updateProgress()"> <span data-en="Engineer / Technical Specialist" data-de="Ingenieur*in / Technische Fachkraft">Engineer / Technical Specialist</span></label>
+            <label><input type="radio" name="q1" value="Manager / Supervisor" onchange="updateProgress()"> <span data-en="Manager / Supervisor" data-de="Manager*in / Vorgesetzte*r">Manager / Supervisor</span></label>
+            <label><input type="radio" name="q1" value="Academic / Researcher" onchange="updateProgress()"> <span data-en="Academic / Researcher" data-de="Akademiker*in / Forscher*in">Academic / Researcher</span></label>
+            <label><input type="radio" name="q1" value="Student" onchange="updateProgress()"> <span data-en="Student" data-de="Studierende*r">Student</span></label>
+            <label><input type="radio" name="q1" value="Other" onchange="updateProgress()"> <span data-en="Other" data-de="Sonstiges">Other</span></label>
+          </div>
+          <div class="field-error" id="err-q1">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
+            <span data-en="Please select your background." data-de="Bitte wählen Sie Ihren Hintergrund aus.">Please select your background.</span>
+          </div>
+        </div>
+
+        <hr class="q-divider">
+
+        <!-- Q2 -->
+        <div class="question-block" id="qb-q2">
+          <label class="q-label">
+            <span data-en="Q2. Do you have prior experience with workplace health and safety procedures?" data-de="F2. Haben Sie Vorerfahrungen mit betrieblichen Gesundheitsschutz- und Sicherheitsverfahren?">Q2. Do you have prior experience with workplace health and safety procedures?</span>
+            <span class="req">*</span>
+          </label>
+          <div class="radio-group">
+            <label><input type="radio" name="q2" value="Yes, extensive experience" onchange="updateProgress()"> <span data-en="Yes, extensive experience" data-de="Ja, umfangreiche Erfahrung">Yes, extensive experience</span></label>
+            <label><input type="radio" name="q2" value="Yes, some experience" onchange="updateProgress()"> <span data-en="Yes, some experience" data-de="Ja, etwas Erfahrung">Yes, some experience</span></label>
+            <label><input type="radio" name="q2" value="No experience" onchange="updateProgress()"> <span data-en="No experience" data-de="Keine Erfahrung">No experience</span></label>
+          </div>
+          <div class="field-error" id="err-q2">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
+            <span data-en="Please select an option." data-de="Bitte wählen Sie eine Option aus.">Please select an option.</span>
+          </div>
+        </div>
+
+        <hr class="q-divider">
+
+        <!-- Q3 -->
+        <div class="question-block" id="qb-q3">
+          <label class="q-label">
+            <span data-en="Q3. Have you used an AI chatbot before?" data-de="F3. Haben Sie schon einmal einen KI-Chatbot verwendet?">Q3. Have you used an AI chatbot before?</span>
+            <span class="req">*</span>
+          </label>
+          <div class="radio-group">
+            <label><input type="radio" name="q3" value="Yes, regularly" onchange="updateProgress()"> <span data-en="Yes, regularly" data-de="Ja, regelmäßig">Yes, regularly</span></label>
+            <label><input type="radio" name="q3" value="Yes, occasionally" onchange="updateProgress()"> <span data-en="Yes, occasionally" data-de="Ja, gelegentlich">Yes, occasionally</span></label>
+            <label><input type="radio" name="q3" value="No, never" onchange="updateProgress()"> <span data-en="No, never" data-de="Nein, noch nie">No, never</span></label>
+          </div>
+          <div class="field-error" id="err-q3">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
+            <span data-en="Please select an option." data-de="Bitte wählen Sie eine Option aus.">Please select an option.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECTION 2: Likert Scale -->
+    <div class="section-card" id="sec2">
+      <div class="section-header">
+        <div class="section-num">2</div>
+          <div class="section-title" data-en="Chatbot Prototype Evaluation — Please rate each statement" data-de="Bewertung des Chatbot-Prototyps — Bitte bewerten Sie jede Aussage">Chatbot Prototype Evaluation — Please rate each statement</div>
+      </div>
+      <div class="section-body">
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;" data-en="1 = Strongly Disagree &nbsp;·&nbsp; 2 = Disagree &nbsp;·&nbsp; 3 = Neutral &nbsp;·&nbsp; 4 = Agree &nbsp;·&nbsp; 5 = Strongly Agree" data-de="1 = Stimme überhaupt nicht zu &nbsp;·&nbsp; 2 = Stimme nicht zu &nbsp;·&nbsp; 3 = Neutral &nbsp;·&nbsp; 4 = Stimme zu &nbsp;·&nbsp; 5 = Stimme voll zu">1 = Strongly Disagree &nbsp;·&nbsp; 2 = Disagree &nbsp;·&nbsp; 3 = Neutral &nbsp;·&nbsp; 4 = Agree &nbsp;·&nbsp; 5 = Strongly Agree</p>
+
+        <div id="likert-wrap">
+        <!-- Desktop table -->
+        <table class="likert-table" id="likert-desktop" aria-label="Likert scale evaluation">
+          <thead>
+            <tr>
+              <th class="col-stmt" data-en="Statement" data-de="Aussage">Statement</th>
+              <th data-en="1<br>Strongly<br>Disagree" data-de="1<br>Stimme gar<br>nicht zu">1<br><span style="font-weight:400;font-size:10px;" data-en="Strongly Disagree" data-de="Stimme gar nicht zu">Strongly Disagree</span></th>
+              <th>2<br><span style="font-weight:400;font-size:10px;" data-en="Disagree" data-de="Nicht zu">Disagree</span></th>
+              <th>3<br><span style="font-weight:400;font-size:10px;" data-en="Neutral" data-de="Neutral">Neutral</span></th>
+              <th>4<br><span style="font-weight:400;font-size:10px;" data-en="Agree" data-de="Stimme zu">Agree</span></th>
+              <th>5<br><span style="font-weight:400;font-size:10px;" data-en="Strongly Agree" data-de="Voll zu">Strongly Agree</span></th>
+            </tr>
+          </thead>
+          <tbody id="likert-body">
+          </tbody>
+        </table>
+        </div>
+        <div class="field-error" id="err-likert" style="margin-top:10px;">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
+          <span data-en="Please rate all statements above." data-de="Bitte bewerten Sie alle obigen Aussagen.">Please rate all statements above.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Open-ended -->
+    <div class="section-card" id="sec3">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title" data-en="Open-Ended Feedback" data-de="Offene Rückmeldungen">Open-Ended Feedback</div>
+      </div>
+      <div class="section-body">
+
+        <!-- Q13 required -->
+        <div class="question-block" id="qb-q13">
+          <label class="q-label" for="q13">
+            <span data-en="Q13. Which part of the chatbot prototype response was most useful?" data-de="F13. Welcher Teil der Antwort des Chatbot-Prototyps war am nützlichsten?">Q13. Which part of the chatbot prototype response was most useful?</span>
+            <span class="req">*</span>
+          </label>
+          <textarea id="q13" name="q13_most_useful" placeholder="" onchange="updateProgress()" oninput="updateProgress()"></textarea>
+          <div class="field-error" id="err-q13">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
+            <span data-en="This field is required." data-de="Dieses Feld ist erforderlich.">This field is required.</span>
+          </div>
+        </div>
+
+        <hr class="q-divider">
+
+        <!-- Q14 optional -->
+        <div class="question-block">
+          <label class="q-label" for="q14">
+            <span data-en="Q14. Was any part of the chatbot prototype response unclear or confusing?" data-de="F14. War ein Teil der Antwort des Chatbot-Prototyps unklar oder verwirrend?">Q14. Was any part of the chatbot prototype response unclear or confusing?</span>
+            <span style="font-size:11px;color:var(--text-muted);margin-left:4px;" data-en="(Optional)" data-de="(Optional)">(Optional)</span>
+          </label>
+          <textarea id="q14" name="q14_unclear" class="optional" placeholder=""></textarea>
+        </div>
+
+        <hr class="q-divider">
+
+        <!-- Q15 optional -->
+        <div class="question-block">
+          <label class="q-label" for="q15">
+            <span data-en="Q15. Did the chatbot prototype miss any important safety information?" data-de="F15. Hat der Chatbot-Prototyp wichtige Sicherheitsinformationen übersehen?">Q15. Did the chatbot prototype miss any important safety information?</span>
+            <span style="font-size:11px;color:var(--text-muted);margin-left:4px;" data-en="(Optional)" data-de="(Optional)">(Optional)</span>
+          </label>
+          <textarea id="q15" name="q15_missing_info" class="optional" placeholder=""></textarea>
+        </div>
+
+        <hr class="q-divider">
+
+        <!-- Q16 optional -->
+        <div class="question-block">
+          <label class="q-label" for="q16">
+            <span data-en="Q16. What improvement would make the chatbot prototype more useful?" data-de="F16. Welche Verbesserung würde den Chatbot-Prototyp nützlicher machen?">Q16. What improvement would make the chatbot prototype more useful?</span>
+            <span style="font-size:11px;color:var(--text-muted);margin-left:4px;" data-en="(Optional)" data-de="(Optional)">(Optional)</span>
+          </label>
+          <textarea id="q16" name="q16_improvement" class="optional" placeholder=""></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECTION 4: Overall Rating -->
+    <div class="section-card" id="sec4">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div class="section-title" data-en="Overall Rating" data-de="Gesamtbewertung">Overall Rating</div>
+      </div>
+      <div class="section-body">
+        <div class="question-block" id="qb-q17">
+          <label class="q-label">
+            <span data-en="Q17. Overall, how would you rate the chatbot prototype's usefulness for early-stage workplace hazard screening?" data-de="F17. Wie würden Sie insgesamt die Nützlichkeit des Chatbot-Prototyps für die Früherkennung von Arbeitsplatzgefahren bewerten?">Q17. Overall, how would you rate the chatbot prototype's usefulness for early-stage workplace hazard screening?</span>
+            <span class="req">*</span>
+          </label>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px;">
+            <div class="star-group" id="star-group" role="radiogroup" aria-label="Star rating 1 to 5">
+              <input class="star-option" type="radio" name="q17_rating" id="s5" value="5" onchange="updateProgress(); updateStarLabel(5)">
+              <label class="star-label" for="s5" aria-label="5 stars">★</label>
+              <input class="star-option" type="radio" name="q17_rating" id="s4" value="4" onchange="updateProgress(); updateStarLabel(4)">
+              <label class="star-label" for="s4" aria-label="4 stars">★</label>
+              <input class="star-option" type="radio" name="q17_rating" id="s3" value="3" onchange="updateProgress(); updateStarLabel(3)">
+              <label class="star-label" for="s3" aria-label="3 stars">★</label>
+              <input class="star-option" type="radio" name="q17_rating" id="s2" value="2" onchange="updateProgress(); updateStarLabel(2)">
+              <label class="star-label" for="s2" aria-label="2 stars">★</label>
+              <input class="star-option" type="radio" name="q17_rating" id="s1" value="1" onchange="updateProgress(); updateStarLabel(1)">
+              <label class="star-label" for="s1" aria-label="1 star">★</label>
+            </div>
+            <span class="star-value-label" id="star-label-text"></span>
+          </div>
+          <div class="field-error" id="err-q17">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
+            <span data-en="Please select a rating." data-de="Bitte wählen Sie eine Bewertung aus.">Please select a rating.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERROR BANNER -->
+    <div class="form-error-banner" id="form-error-banner">
+      <span data-en="⚠ Please complete all required fields before submitting." data-de="⚠ Bitte füllen Sie alle Pflichtfelder aus, bevor Sie absenden.">⚠ Please complete all required fields before submitting.</span>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-area">
+      <button type="submit" class="btn-submit" id="btn-submit">
+        <span data-en="Submit Response" data-de="Antwort absenden">Submit Response</span>
+      </button>
+    </div>
+
+  </form>
+
+  <!-- SUCCESS SCREEN -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">
+      <svg width="32" height="32" fill="none" stroke="#16a34a" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 data-en="Thank you for your response!" data-de="Vielen Dank für Ihre Antwort!">Thank you for your response!</h2>
+    <p data-en="Your feedback has been recorded and will contribute to Kumar Viswajeet's evaluation of the chatbot prototype as part of an MSc Artificial Intelligence dissertation. Your responses are fully anonymised." data-de="Ihr Feedback wurde gespeichert und trägt zu Kumar Viswajeets Bewertung des Chatbot-Prototyps im Rahmen einer MSc-Dissertation im Bereich Künstliche Intelligenz bei. Ihre Antworten sind vollständig anonymisiert.">Your feedback has been recorded and will contribute to Kumar Viswajeet's evaluation of the chatbot prototype as part of an MSc Artificial Intelligence dissertation. Your responses are fully anonymised.</p>
+  </div>
+
+</main>
+
+<footer class="form-footer">
+  <span data-en="BSBI · Kumar Viswajeet · Supervisor: Dr Vincent English · MSc Artificial Intelligence Dissertation · Responses are anonymised · Berlin, 2025–26" data-de="BSBI · Kumar Viswajeet · Betreuer: Dr Vincent English · MSc Künstliche Intelligenz Dissertation · Antworten werden anonymisiert · Berlin, 2025–26">BSBI · Kumar Viswajeet · Supervisor: Dr Vincent English · MSc Artificial Intelligence Dissertation · Responses are anonymised · Berlin, 2025–26</span>
+</footer>
+
+<script>
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwyIGqGhrQnBNGaLsHOCuU2xlCxv3n6MmLwbop_Uvt-mEeblwtIR7FPeI3IVeB_kKM0/exec';
+
+// ─────────────────────────────────────────────
+// LIKERT STATEMENTS
+// ─────────────────────────────────────────────
+const likertItems = [
+  { name: 'l1', en: 'The chatbot was easy to use.',                                              de: 'Der Chatbot war einfach zu bedienen.' },
+  { name: 'l2', en: 'The chatbot instructions were clear.',                                      de: 'Die Anweisungen des Chatbots waren verständlich.' },
+  { name: 'l3', en: 'The chatbot response was easy to understand.',                              de: 'Die Chatbot-Antwort war leicht verständlich.' },
+  { name: 'l4', en: 'The hazard category provided by the chatbot seemed relevant.',              de: 'Die vom Chatbot genannte Gefahrenkategorie schien relevant.' },
+  { name: 'l5', en: 'The risk level provided by the chatbot seemed reasonable.',                 de: 'Das vom Chatbot angegebene Risikoniveau schien angemessen.' },
+  { name: 'l6', en: 'The recommended safety action was practical.',                              de: 'Die empfohlene Sicherheitsmaßnahme war praktisch umsetzbar.' },
+  { name: 'l7', en: 'The chatbot clearly explained whether escalation was needed.',              de: 'Der Chatbot erklärte klar, ob eine Eskalation erforderlich war.' },
+  { name: 'l8', en: 'The chatbot helped me understand the workplace hazard more clearly.',       de: 'Der Chatbot half mir, die Arbeitsgefahr besser zu verstehen.' },
+  { name: 'l9', en: 'I would trust the chatbot as an early-stage safety support tool.',         de: 'Ich würde dem Chatbot als frühzeitigem Sicherheitsunterstützungstool vertrauen.' },
+  { name: 'l10',en: 'The chatbot could be useful for basic workplace safety screening.',        de: 'Der Chatbot könnte für die grundlegende Arbeitssicherheitsüberprüfung nützlich sein.' },
+];
+
+const starLabels = {
+  en: { 1: 'Not useful', 2: 'Slightly useful', 3: 'Moderately useful', 4: 'Very useful', 5: 'Extremely useful' },
+  de: { 1: 'Nicht nützlich', 2: 'Wenig nützlich', 3: 'Mäßig nützlich', 4: 'Sehr nützlich', 5: 'Äußerst nützlich' }
+};
+
+// ─────────────────────────────────────────────
+// LANGUAGE SYSTEM
+// ─────────────────────────────────────────────
+let currentLang = localStorage.getItem('scarp_lang') || 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('scarp_lang', lang);
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val !== null) el.innerHTML = val;
+  });
+
+  // Update textarea placeholders
+  const placeholders = {
+    en: { q13: 'e.g. The hazard category and escalation recommendation were most helpful…', q14: 'e.g. The risk level description was hard to interpret…', q15: 'e.g. No mention of PPE requirements…', q16: 'e.g. Adding image upload capability would help…' },
+    de: { q13: 'z.B. Die Gefahrenkategorie und die Eskalationsempfehlung waren am hilfreichsten…', q14: 'z.B. Die Beschreibung des Risikoniveaus war schwer zu interpretieren…', q15: 'z.B. Keine Erwähnung von PSA-Anforderungen…', q16: 'z.B. Das Hinzufügen einer Bildupload-Funktion wäre hilfreich…' }
+  };
+  ['q13','q14','q15','q16'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.placeholder = placeholders[lang][id];
+  });
+
+  // Update star label if selected
+  const sel = document.querySelector('input[name="q17_rating"]:checked');
+  if (sel) updateStarLabel(parseInt(sel.value));
+
+  // Toggle buttons
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+  document.getElementById('btn-en').setAttribute('aria-pressed', lang === 'en');
+  document.getElementById('btn-de').setAttribute('aria-pressed', lang === 'de');
+}
+
+// ─────────────────────────────────────────────
+// BUILD LIKERT TABLE
+// ─────────────────────────────────────────────
+function buildLikert() {
+  const tbody = document.getElementById('likert-body');
+  tbody.innerHTML = '';
+  likertItems.forEach((item, i) => {
+    const tr = document.createElement('tr');
+    const tdStmt = document.createElement('td');
+    tdStmt.className = 'stmt-cell';
+    tdStmt.setAttribute('data-en', item.en);
+    tdStmt.setAttribute('data-de', item.de);
+    tdStmt.textContent = item[currentLang] || item.en;
+    tr.appendChild(tdStmt);
+    for (let v = 1; v <= 5; v++) {
+      const td = document.createElement('td');
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = item.name;
+      input.value = v;
+      input.setAttribute('aria-label', `${item.en} — ${v}`);
+      input.addEventListener('change', updateProgress);
+      td.appendChild(input);
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  });
+}
+
+// ─────────────────────────────────────────────
+// PROGRESS BAR
+// ─────────────────────────────────────────────
+function countRequiredAnswered() {
+  let answered = 0;
+  const total = 15; // consent + q1 + q2 + q3 + 10 likert + q13 + q17
+
+  if (document.getElementById('consent-cb').checked) answered++;
+  ['q1','q2','q3'].forEach(name => {
+    if (document.querySelector(`input[name="${name}"]:checked`)) answered++;
+  });
+  likertItems.forEach(item => {
+    if (document.querySelector(`input[name="${item.name}"]:checked`)) answered++;
+  });
+  if (document.getElementById('q13').value.trim()) answered++;
+  if (document.querySelector('input[name="q17_rating"]:checked')) answered++;
+
+  return { answered, total };
+}
+
+function updateProgress() {
+  const { answered, total } = countRequiredAnswered();
+  const pct = Math.min(100, Math.round((answered / total) * 100));
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = pct + '%';
+  document.querySelector('.progress-wrap').setAttribute('aria-valuenow', pct);
+}
+
+// ─────────────────────────────────────────────
+// STAR RATING LABEL
+// ─────────────────────────────────────────────
+function updateStarLabel(val) {
+  const el = document.getElementById('star-label-text');
+  el.textContent = starLabels[currentLang][val] || '';
+}
+
+// ─────────────────────────────────────────────
+// VALIDATION
+// ─────────────────────────────────────────────
+function validate() {
+  let valid = true;
+
+  // Consent
+  const cb = document.getElementById('consent-cb');
+  const errConsent = document.getElementById('err-consent');
+  if (!cb.checked) {
+    errConsent.classList.add('visible');
+    valid = false;
+  } else {
+    errConsent.classList.remove('visible');
+  }
+
+  // Q1, Q2, Q3
+  ['q1','q2','q3'].forEach(name => {
+    const err = document.getElementById('err-' + name);
+    const sel = document.querySelector(`input[name="${name}"]:checked`);
+    if (!sel) { err.classList.add('visible'); valid = false; }
+    else err.classList.remove('visible');
+  });
+
+  // Likert — all 10 required
+  const likertErr = document.getElementById('err-likert');
+  let allLikert = true;
+  likertItems.forEach(item => {
+    if (!document.querySelector(`input[name="${item.name}"]:checked`)) allLikert = false;
+  });
+  if (!allLikert) { likertErr.classList.add('visible'); valid = false; }
+  else likertErr.classList.remove('visible');
+
+  // Q13
+  const q13val = document.getElementById('q13').value.trim();
+  const errQ13 = document.getElementById('err-q13');
+  if (!q13val) { errQ13.classList.add('visible'); document.getElementById('qb-q13').classList.add('has-error'); valid = false; }
+  else { errQ13.classList.remove('visible'); document.getElementById('qb-q13').classList.remove('has-error'); }
+
+  // Q17
+  const errQ17 = document.getElementById('err-q17');
+  if (!document.querySelector('input[name="q17_rating"]:checked')) {
+    errQ17.classList.add('visible'); valid = false;
+  } else {
+    errQ17.classList.remove('visible');
+  }
+
+  return valid;
+}
+
+// ─────────────────────────────────────────────
+// FORM SUBMIT
+// ─────────────────────────────────────────────
+document.getElementById('scarp-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const banner = document.getElementById('form-error-banner');
+
+  if (!validate()) {
+    banner.classList.add('visible');
+    // Scroll to first error
+    const firstErr = document.querySelector('.field-error.visible');
+    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  banner.classList.remove('visible');
+
+  // Set hidden fields
+  document.getElementById('field-lang').value = currentLang === 'en' ? 'English' : 'German';
+  document.getElementById('field-ts').value = new Date().toISOString();
+
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.querySelector('span').setAttribute('data-en', 'Submitting…');
+  btn.querySelector('span').setAttribute('data-de', 'Wird gesendet…');
+  btn.querySelector('span').textContent = currentLang === 'en' ? 'Submitting…' : 'Wird gesendet…';
+
+  // Build FormData
+  const fd = new FormData(this);
+
+  // Add likert values explicitly with readable names
+  likertItems.forEach(item => {
+    const sel = document.querySelector(`input[name="${item.name}"]:checked`);
+    if (sel) fd.set(item.en.replace(/[^a-zA-Z0-9 ]/g,'').trim(), sel.value);
+  });
+
+  try {
+    // Send the questionnaire response to Google Sheets through Google Apps Script.
+    // mode: 'no-cors' avoids browser CORS blocking with Apps Script web apps.
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      body: fd,
+      mode: 'no-cors'
+    });
+
+    document.getElementById('scarp-form').style.display = 'none';
+    document.querySelector('.consent-banner').style.display = 'none';
+    document.querySelector('.consent-check-row').style.display = 'none';
+    document.getElementById('err-consent').style.display = 'none';
+
+    const s = document.getElementById('success-screen');
+    s.classList.add('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Update success text for selected language
+    s.querySelectorAll('[data-en]').forEach(el => {
+      el.innerHTML = el.getAttribute('data-' + currentLang) || el.innerHTML;
+    });
+
+  } catch(err) {
+    alert(currentLang === 'en'
+      ? 'Network error. Please check your connection and try again.'
+      : 'Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.');
+    btn.disabled = false;
+    btn.querySelector('span').textContent = currentLang === 'en' ? 'Submit Response' : 'Antwort absenden';
+  }
+});
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+buildLikert();
+setLang(currentLang);
+updateProgress();
+</script>
+</body>
+</html>
