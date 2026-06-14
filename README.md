@@ -1,5 +1,7 @@
 # Hazard Chatbot: Workplace Hazard Assessment Questionnaire
 
+**Try the chatbot:** [https://kv8936.github.io/kv-chatbot/](https://kv8936.github.io/kv-chatbot/)
+
 ## Academic Context
 
 - Dissertation ID: Q1037375
@@ -30,6 +32,8 @@ This questionnaire is intended for academic evaluation only. Responses are anony
 ## About the Hazard Chatbot
 
 The hazard chatbot is a dissertation prototype for workplace hazard identification and early-stage risk assessment. The system analyses workplace hazard scenarios, classifies the likely hazard category, assigns a risk level, and generates structured safety recommendations.
+
+
 
 ## Key Features of the Questionnaire
 
@@ -146,6 +150,7 @@ The dataset was synthetic but designed to reflect realistic workplace hazard sce
 ```text
 .
 ├── index.html         # Complete questionnaire interface
+├── favicon.svg        # Site favicon (HC — Hazard Chatbot)
 ├── netlify.toml       # Optional deployment config
 └── README.md          # Project documentation
 ```
