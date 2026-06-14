@@ -653,6 +653,7 @@
   <form id="survey-form" novalidate>
     <input type="hidden" id="field-lang" name="language">
     <input type="hidden" id="field-ts" name="timestamp">
+    <input type="hidden" name="reverse_items" value="l7,l19">
 
     <!-- SECTION 1: Background -->
     <div class="section-card" id="sec1">
@@ -764,14 +765,14 @@
       </div>
       <div class="section-body">
 
-        <!-- Q13 required -->
-        <div class="question-block" id="qb-q13">
-          <label class="q-label" for="q13">
-            <span data-en="Q13. Which part of the chatbot prototype response was most useful?" data-de="F13. Welcher Teil der Antwort des Chatbot-Prototyps war am nützlichsten?">Q13. Which part of the chatbot prototype response was most useful?</span>
+        <!-- Q24 required -->
+        <div class="question-block" id="qb-q24">
+          <label class="q-label" for="q24">
+            <span data-en="Q24. Which part of the chatbot prototype response was most useful?" data-de="F24. Welcher Teil der Antwort des Chatbot-Prototyps war am nützlichsten?">Q24. Which part of the chatbot prototype response was most useful?</span>
             <span class="req">*</span>
           </label>
-          <textarea id="q13" name="q13_most_useful" placeholder="" onchange="updateProgress()" oninput="updateProgress()"></textarea>
-          <div class="field-error" id="err-q13">
+          <textarea id="q24" name="q24_most_useful" placeholder="" onchange="updateProgress()" oninput="updateProgress()"></textarea>
+          <div class="field-error" id="err-q24">
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
             <span data-en="This field is required." data-de="Dieses Feld ist erforderlich.">This field is required.</span>
           </div>
@@ -779,35 +780,35 @@
 
         <hr class="q-divider">
 
-        <!-- Q14 optional -->
+        <!-- Q25 optional -->
         <div class="question-block">
-          <label class="q-label" for="q14">
-            <span data-en="Q14. Was any part of the chatbot prototype response unclear or confusing?" data-de="F14. War ein Teil der Antwort des Chatbot-Prototyps unklar oder verwirrend?">Q14. Was any part of the chatbot prototype response unclear or confusing?</span>
+          <label class="q-label" for="q25">
+            <span data-en="Q25. Was any part of the chatbot prototype response unclear or confusing?" data-de="F25. War ein Teil der Antwort des Chatbot-Prototyps unklar oder verwirrend?">Q25. Was any part of the chatbot prototype response unclear or confusing?</span>
             <span style="font-size:11px;color:var(--text-muted);margin-left:4px;" data-en="(Optional)" data-de="(Optional)">(Optional)</span>
           </label>
-          <textarea id="q14" name="q14_unclear" class="optional" placeholder=""></textarea>
+          <textarea id="q25" name="q25_unclear" class="optional" placeholder=""></textarea>
         </div>
 
         <hr class="q-divider">
 
-        <!-- Q15 optional -->
+        <!-- Q26 optional -->
         <div class="question-block">
-          <label class="q-label" for="q15">
-            <span data-en="Q15. Did the chatbot prototype miss any important safety information?" data-de="F15. Hat der Chatbot-Prototyp wichtige Sicherheitsinformationen übersehen?">Q15. Did the chatbot prototype miss any important safety information?</span>
+          <label class="q-label" for="q26">
+            <span data-en="Q26. Did the chatbot prototype miss any important safety information?" data-de="F26. Hat der Chatbot-Prototyp wichtige Sicherheitsinformationen übersehen?">Q26. Did the chatbot prototype miss any important safety information?</span>
             <span style="font-size:11px;color:var(--text-muted);margin-left:4px;" data-en="(Optional)" data-de="(Optional)">(Optional)</span>
           </label>
-          <textarea id="q15" name="q15_missing_info" class="optional" placeholder=""></textarea>
+          <textarea id="q26" name="q26_missing_info" class="optional" placeholder=""></textarea>
         </div>
 
         <hr class="q-divider">
 
-        <!-- Q16 optional -->
+        <!-- Q27 optional -->
         <div class="question-block">
-          <label class="q-label" for="q16">
-            <span data-en="Q16. What improvement would make the chatbot prototype more useful?" data-de="F16. Welche Verbesserung würde den Chatbot-Prototyp nützlicher machen?">Q16. What improvement would make the chatbot prototype more useful?</span>
+          <label class="q-label" for="q27">
+            <span data-en="Q27. What improvement would make the chatbot prototype more useful?" data-de="F27. Welche Verbesserung würde den Chatbot-Prototyp nützlicher machen?">Q27. What improvement would make the chatbot prototype more useful?</span>
             <span style="font-size:11px;color:var(--text-muted);margin-left:4px;" data-en="(Optional)" data-de="(Optional)">(Optional)</span>
           </label>
-          <textarea id="q16" name="q16_improvement" class="optional" placeholder=""></textarea>
+          <textarea id="q27" name="q27_improvement" class="optional" placeholder=""></textarea>
         </div>
 
       </div>
@@ -820,27 +821,28 @@
         <div class="section-title" data-en="Overall Rating" data-de="Gesamtbewertung">Overall Rating</div>
       </div>
       <div class="section-body">
-        <div class="question-block" id="qb-q17">
+        <div class="question-block" id="qb-q28">
           <label class="q-label">
-            <span data-en="Q17. Overall, how would you rate the chatbot prototype's usefulness for early-stage workplace hazard screening?" data-de="F17. Wie würden Sie insgesamt die Nützlichkeit des Chatbot-Prototyps für die Früherkennung von Arbeitsplatzgefahren bewerten?">Q17. Overall, how would you rate the chatbot prototype's usefulness for early-stage workplace hazard screening?</span>
+            <span data-en="Q28. Overall, how would you rate the chatbot prototype's usefulness for early-stage workplace hazard screening?" data-de="F28. Wie würden Sie insgesamt die Nützlichkeit des Chatbot-Prototyps für die Früherkennung von Arbeitsplatzgefahren bewerten?">Q28. Overall, how would you rate the chatbot prototype's usefulness for early-stage workplace hazard screening?</span>
             <span class="req">*</span>
           </label>
+          <p style="font-size:12px;color:var(--text-muted);margin:4px 0 8px;" data-en="1 = Not useful at all &nbsp;·&nbsp; 2 = Slightly useful &nbsp;·&nbsp; 3 = Moderately useful &nbsp;·&nbsp; 4 = Very useful &nbsp;·&nbsp; 5 = Extremely useful" data-de="1 = Überhaupt nicht nützlich &nbsp;·&nbsp; 2 = Wenig nützlich &nbsp;·&nbsp; 3 = Mäßig nützlich &nbsp;·&nbsp; 4 = Sehr nützlich &nbsp;·&nbsp; 5 = Äußerst nützlich">1 = Not useful at all &nbsp;·&nbsp; 2 = Slightly useful &nbsp;·&nbsp; 3 = Moderately useful &nbsp;·&nbsp; 4 = Very useful &nbsp;·&nbsp; 5 = Extremely useful</p>
           <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px;">
             <div class="star-group" id="star-group" role="radiogroup" aria-label="Star rating 1 to 5">
-              <input class="star-option" type="radio" name="q17_rating" id="s5" value="5" onchange="updateProgress(); updateStarLabel(5)">
+              <input class="star-option" type="radio" name="q28_rating" id="s5" value="5" onchange="updateProgress(); updateStarLabel(5)">
               <label class="star-label" for="s5" aria-label="5 stars">★</label>
-              <input class="star-option" type="radio" name="q17_rating" id="s4" value="4" onchange="updateProgress(); updateStarLabel(4)">
+              <input class="star-option" type="radio" name="q28_rating" id="s4" value="4" onchange="updateProgress(); updateStarLabel(4)">
               <label class="star-label" for="s4" aria-label="4 stars">★</label>
-              <input class="star-option" type="radio" name="q17_rating" id="s3" value="3" onchange="updateProgress(); updateStarLabel(3)">
+              <input class="star-option" type="radio" name="q28_rating" id="s3" value="3" onchange="updateProgress(); updateStarLabel(3)">
               <label class="star-label" for="s3" aria-label="3 stars">★</label>
-              <input class="star-option" type="radio" name="q17_rating" id="s2" value="2" onchange="updateProgress(); updateStarLabel(2)">
+              <input class="star-option" type="radio" name="q28_rating" id="s2" value="2" onchange="updateProgress(); updateStarLabel(2)">
               <label class="star-label" for="s2" aria-label="2 stars">★</label>
-              <input class="star-option" type="radio" name="q17_rating" id="s1" value="1" onchange="updateProgress(); updateStarLabel(1)">
+              <input class="star-option" type="radio" name="q28_rating" id="s1" value="1" onchange="updateProgress(); updateStarLabel(1)">
               <label class="star-label" for="s1" aria-label="1 star">★</label>
             </div>
             <span class="star-value-label" id="star-label-text"></span>
           </div>
-          <div class="field-error" id="err-q17">
+          <div class="field-error" id="err-q28">
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
             <span data-en="Please select a rating." data-de="Bitte wählen Sie eine Bewertung aus.">Please select a rating.</span>
           </div>
@@ -880,27 +882,37 @@
 </footer>
 
 <script>
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwyIGqGhrQnBNGaLsHOCuU2xlCxv3n6MmLwbop_Uvt-mEeblwtIR7FPeI3IVeB_kKM0/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwqq1sI8KzjJmPscjZg3Tukqo4N94FKCor4vPEwqvNZsiVVmQ7iUKFTeXh-8oTmienN/exec';
 
 // ─────────────────────────────────────────────
 // LIKERT STATEMENTS
 // ─────────────────────────────────────────────
 const likertItems = [
-  { name: 'l1', en: 'The chatbot was easy to use.',                                              de: 'Der Chatbot war einfach zu bedienen.' },
-  { name: 'l2', en: 'The chatbot instructions were clear.',                                      de: 'Die Anweisungen des Chatbots waren verständlich.' },
-  { name: 'l3', en: 'The chatbot response was easy to understand.',                              de: 'Die Chatbot-Antwort war leicht verständlich.' },
-  { name: 'l4', en: 'The hazard category provided by the chatbot seemed relevant.',              de: 'Die vom Chatbot genannte Gefahrenkategorie schien relevant.' },
-  { name: 'l5', en: 'The risk level provided by the chatbot seemed reasonable.',                 de: 'Das vom Chatbot angegebene Risikoniveau schien angemessen.' },
-  { name: 'l6', en: 'The recommended safety action was practical.',                              de: 'Die empfohlene Sicherheitsmaßnahme war praktisch umsetzbar.' },
-  { name: 'l7', en: 'The chatbot clearly explained whether escalation was needed.',              de: 'Der Chatbot erklärte klar, ob eine Eskalation erforderlich war.' },
-  { name: 'l8', en: 'The chatbot helped me understand the workplace hazard more clearly.',       de: 'Der Chatbot half mir, die Arbeitsgefahr besser zu verstehen.' },
-  { name: 'l9', en: 'I would trust the chatbot as an early-stage safety support tool.',         de: 'Ich würde dem Chatbot als frühzeitigem Sicherheitsunterstützungstool vertrauen.' },
-  { name: 'l10',en: 'The chatbot could be useful for basic workplace safety screening.',        de: 'Der Chatbot könnte für die grundlegende Arbeitssicherheitsüberprüfung nützlich sein.' },
+  { name: 'l1',  construct: 'Ease of use',           en: 'The chatbot was easy to use.',                                                                   de: 'Der Chatbot war einfach zu bedienen.' },
+  { name: 'l2',  construct: 'Ease of use',           en: 'I was able to navigate the chatbot without difficulty.',                                          de: 'Ich konnte den Chatbot problemlos navigieren.' },
+  { name: 'l3',  construct: 'Instructions',          en: 'The instructions for using the chatbot were clear.',                                              de: 'Die Anweisungen zur Nutzung des Chatbots waren klar.' },
+  { name: 'l4',  construct: 'Instructions',          en: 'I understood what information I needed to enter into the chatbot.',                                de: 'Ich verstand, welche Informationen ich in den Chatbot eingeben musste.' },
+  { name: 'l5',  construct: 'Clarity',               en: "The chatbot's responses were easy to understand.",                                                de: 'Die Antworten des Chatbots waren leicht verständlich.' },
+  { name: 'l6',  construct: 'Clarity',               en: 'The chatbot used language that was appropriate for a workplace safety context.',                   de: 'Der Chatbot verwendete eine für den Arbeitsschutzkontext angemessene Sprache.' },
+  { name: 'l7',  construct: 'Clarity',               en: "The chatbot's response was difficult to understand.",                                             de: 'Die Antwort des Chatbots war schwer zu verstehen.', reverse: true },
+  { name: 'l8',  construct: 'Hazard identification', en: 'The hazard category provided by the chatbot seemed relevant.',                                     de: 'Die vom Chatbot genannte Gefahrenkategorie schien relevant.' },
+  { name: 'l9',  construct: 'Hazard identification', en: 'The chatbot correctly recognised the main safety issue in the scenario.',                           de: 'Der Chatbot erkannte das Hauptsicherheitsproblem im Szenario korrekt.' },
+  { name: 'l10', construct: 'Risk assessment',       en: 'The risk level provided by the chatbot seemed reasonable.',                                        de: 'Das vom Chatbot angegebene Risikoniveau schien angemessen.' },
+  { name: 'l11', construct: 'Risk assessment',       en: "The chatbot's risk assessment matched my own judgement of the scenario.",                          de: 'Die Risikobewertung des Chatbots stimmte mit meiner eigenen Einschätzung des Szenarios überein.' },
+  { name: 'l12', construct: 'Safety action',         en: 'The recommended safety action was practical.',                                                     de: 'Die empfohlene Sicherheitsmaßnahme war praktisch umsetzbar.' },
+  { name: 'l13', construct: 'Safety action',         en: 'The chatbot provided useful guidance on what action should be taken next.',                         de: 'Der Chatbot lieferte nützliche Hinweise, welche Maßnahmen als Nächstes ergriffen werden sollten.' },
+  { name: 'l14', construct: 'Escalation',            en: 'The chatbot clearly explained whether escalation was needed.',                                      de: 'Der Chatbot erklärte klar, ob eine Eskalation erforderlich war.' },
+  { name: 'l15', construct: 'Escalation',            en: 'The escalation recommendation was appropriate for the seriousness of the hazard.',                 de: 'Die Eskalationsempfehlung war dem Schweregrad der Gefahr angemessen.' },
+  { name: 'l16', construct: 'Decision support',      en: 'The chatbot helped me understand the workplace hazard more clearly.',                               de: 'Der Chatbot half mir, die Arbeitsgefahr besser zu verstehen.' },
+  { name: 'l17', construct: 'Decision support',      en: 'The chatbot supported my thinking when considering how to respond to the hazard.',                  de: 'Der Chatbot unterstützte mein Denken bei der Überlegung, wie auf die Gefahr reagiert werden soll.' },
+  { name: 'l18', construct: 'Trust',                 en: 'I would trust the chatbot as an early-stage safety support tool.',                                  de: 'Ich würde dem Chatbot als frühzeitigem Sicherheitsunterstützungstool vertrauen.' },
+  { name: 'l19', construct: 'Trust',                 en: "I would be unsure about relying on the chatbot's recommendation for initial safety screening.",     de: 'Ich wäre unsicher, ob ich mich auf die Empfehlung des Chatbots für die erste Sicherheitsprüfung verlassen würde.', reverse: true },
+  { name: 'l20', construct: 'Usefulness',            en: 'The chatbot could be useful for basic workplace safety screening.',                                 de: 'Der Chatbot könnte für die grundlegende Arbeitssicherheitsüberprüfung nützlich sein.' },
 ];
 
 const starLabels = {
-  en: { 1: 'Not useful', 2: 'Slightly useful', 3: 'Moderately useful', 4: 'Very useful', 5: 'Extremely useful' },
-  de: { 1: 'Nicht nützlich', 2: 'Wenig nützlich', 3: 'Mäßig nützlich', 4: 'Sehr nützlich', 5: 'Äußerst nützlich' }
+  en: { 1: 'Not useful at all', 2: 'Slightly useful', 3: 'Moderately useful', 4: 'Very useful', 5: 'Extremely useful' },
+  de: { 1: 'Überhaupt nicht nützlich', 2: 'Wenig nützlich', 3: 'Mäßig nützlich', 4: 'Sehr nützlich', 5: 'Äußerst nützlich' }
 };
 
 // ─────────────────────────────────────────────
@@ -920,16 +932,16 @@ function setLang(lang) {
 
   // Update textarea placeholders
   const placeholders = {
-    en: { q13: 'e.g. The hazard category and escalation recommendation were most helpful…', q14: 'e.g. The risk level description was hard to interpret…', q15: 'e.g. No mention of PPE requirements…', q16: 'e.g. Adding image upload capability would help…' },
-    de: { q13: 'z.B. Die Gefahrenkategorie und die Eskalationsempfehlung waren am hilfreichsten…', q14: 'z.B. Die Beschreibung des Risikoniveaus war schwer zu interpretieren…', q15: 'z.B. Keine Erwähnung von PSA-Anforderungen…', q16: 'z.B. Das Hinzufügen einer Bildupload-Funktion wäre hilfreich…' }
+    en: { q24: 'e.g. The hazard category and escalation recommendation were most helpful…', q25: 'e.g. The risk level description was hard to interpret…', q26: 'e.g. No mention of PPE requirements…', q27: 'e.g. Adding image upload capability would help…' },
+    de: { q24: 'z.B. Die Gefahrenkategorie und die Eskalationsempfehlung waren am hilfreichsten…', q25: 'z.B. Die Beschreibung des Risikoniveaus war schwer zu interpretieren…', q26: 'z.B. Keine Erwähnung von PSA-Anforderungen…', q27: 'z.B. Das Hinzufügen einer Bildupload-Funktion wäre hilfreich…' }
   };
-  ['q13','q14','q15','q16'].forEach(id => {
+  ['q24','q25','q26','q27'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.placeholder = placeholders[lang][id];
   });
 
   // Update star label if selected
-  const sel = document.querySelector('input[name="q17_rating"]:checked');
+  const sel = document.querySelector('input[name="q28_rating"]:checked');
   if (sel) updateStarLabel(parseInt(sel.value));
 
   // Toggle buttons
@@ -946,12 +958,15 @@ function buildLikert() {
   const tbody = document.getElementById('likert-body');
   tbody.innerHTML = '';
   likertItems.forEach((item, i) => {
+    const qNum = 'Q' + (i + 4);
+    const enText = qNum + '. ' + item.en;
+    const deText = qNum + '. ' + item.de;
     const tr = document.createElement('tr');
     const tdStmt = document.createElement('td');
     tdStmt.className = 'stmt-cell';
-    tdStmt.setAttribute('data-en', item.en);
-    tdStmt.setAttribute('data-de', item.de);
-    tdStmt.textContent = item[currentLang] || item.en;
+    tdStmt.setAttribute('data-en', enText);
+    tdStmt.setAttribute('data-de', deText);
+    tdStmt.textContent = (currentLang === 'de' ? deText : enText);
     tr.appendChild(tdStmt);
     for (let v = 1; v <= 5; v++) {
       const td = document.createElement('td');
@@ -959,7 +974,7 @@ function buildLikert() {
       input.type = 'radio';
       input.name = item.name;
       input.value = v;
-      input.setAttribute('aria-label', `${item.en} — ${v}`);
+      input.setAttribute('aria-label', enText + ' — ' + v);
       input.addEventListener('change', updateProgress);
       td.appendChild(input);
       tr.appendChild(td);
@@ -973,7 +988,7 @@ function buildLikert() {
 // ─────────────────────────────────────────────
 function countRequiredAnswered() {
   let answered = 0;
-  const total = 15; // consent + q1 + q2 + q3 + 10 likert + q13 + q17
+  const total = 1 + 3 + likertItems.length + 1 + 1; // consent + q1+q2+q3 + likert + q24 + q28
 
   if (document.getElementById('consent-cb').checked) answered++;
   ['q1','q2','q3'].forEach(name => {
@@ -982,8 +997,8 @@ function countRequiredAnswered() {
   likertItems.forEach(item => {
     if (document.querySelector(`input[name="${item.name}"]:checked`)) answered++;
   });
-  if (document.getElementById('q13').value.trim()) answered++;
-  if (document.querySelector('input[name="q17_rating"]:checked')) answered++;
+  if (document.getElementById('q24').value.trim()) answered++;
+  if (document.querySelector('input[name="q28_rating"]:checked')) answered++;
 
   return { answered, total };
 }
@@ -1028,7 +1043,7 @@ function validate() {
     else err.classList.remove('visible');
   });
 
-  // Likert — all 10 required
+  // Likert — all 20 required
   const likertErr = document.getElementById('err-likert');
   let allLikert = true;
   likertItems.forEach(item => {
@@ -1037,18 +1052,18 @@ function validate() {
   if (!allLikert) { likertErr.classList.add('visible'); valid = false; }
   else likertErr.classList.remove('visible');
 
-  // Q13
-  const q13val = document.getElementById('q13').value.trim();
-  const errQ13 = document.getElementById('err-q13');
-  if (!q13val) { errQ13.classList.add('visible'); document.getElementById('qb-q13').classList.add('has-error'); valid = false; }
-  else { errQ13.classList.remove('visible'); document.getElementById('qb-q13').classList.remove('has-error'); }
+  // Q24
+  const q24val = document.getElementById('q24').value.trim();
+  const errQ24 = document.getElementById('err-q24');
+  if (!q24val) { errQ24.classList.add('visible'); document.getElementById('qb-q24').classList.add('has-error'); valid = false; }
+  else { errQ24.classList.remove('visible'); document.getElementById('qb-q24').classList.remove('has-error'); }
 
-  // Q17
-  const errQ17 = document.getElementById('err-q17');
-  if (!document.querySelector('input[name="q17_rating"]:checked')) {
-    errQ17.classList.add('visible'); valid = false;
+  // Q28
+  const errQ28 = document.getElementById('err-q28');
+  if (!document.querySelector('input[name="q28_rating"]:checked')) {
+    errQ28.classList.add('visible'); valid = false;
   } else {
-    errQ17.classList.remove('visible');
+    errQ28.classList.remove('visible');
   }
 
   return valid;
@@ -1083,12 +1098,6 @@ document.getElementById('survey-form').addEventListener('submit', async function
 
   // Build FormData
   const fd = new FormData(this);
-
-  // Add likert values explicitly with readable names
-  likertItems.forEach(item => {
-    const sel = document.querySelector(`input[name="${item.name}"]:checked`);
-    if (sel) fd.set(item.en.replace(/[^a-zA-Z0-9 ]/g,'').trim(), sel.value);
-  });
 
   try {
     // Send the questionnaire response to Google Sheets through Google Apps Script.
