@@ -481,7 +481,6 @@
     color: var(--error);
     font-size: 12px;
     margin-top: 6px;
-    display: flex;
     align-items: center;
     gap: 4px;
   }
@@ -553,6 +552,61 @@
     font-size: 14px;
     line-height: 1.7;
   }
+  .success-share {
+    margin-top: 18px;
+    text-align: left;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+  }
+  .success-share-title {
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .success-share-text {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .success-share-actions {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .btn-share {
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-share-primary {
+    color: white;
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .btn-share-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .btn-share-secondary {
+    color: var(--accent);
+    background: white;
+  }
+  .btn-share-secondary:hover {
+    background: var(--accent-light);
+    border-color: #bfdbfe;
+  }
+  .share-status {
+    min-height: 18px;
+    margin-top: 8px;
+    color: var(--text-muted);
+    font-size: 12px;
+  }
 
   /* ── FOOTER ── */
   .form-footer {
@@ -590,6 +644,7 @@
       padding: 10px 16px;
     }
     .btn-submit { width: 100%; }
+    .success-share-actions .btn-share { width: 100%; }
   }
 </style>
 </head>
@@ -654,6 +709,7 @@
   <form id="survey-form" novalidate>
     <input type="hidden" id="field-lang" name="language">
     <input type="hidden" id="field-ts" name="timestamp">
+    <!-- For 4-point Likert analysis, reverse-code reverse items as: recoded = 5 - original -->
     <input type="hidden" name="reverse_items" value="l7,l19">
 
     <!-- SECTION 1: Background -->
@@ -725,43 +781,66 @@
       </div>
     </div>
 
-    <!-- SECTION 2: Likert Scale -->
+    <!-- SECTION 2: Usability -->
     <div class="section-card" id="sec2">
       <div class="section-header">
         <div class="section-num">2</div>
-          <div class="section-title" data-en="Chatbot Prototype Evaluation — Please rate each statement" data-de="Bewertung des Chatbot-Prototyps — Bitte bewerten Sie jede Aussage">Chatbot Prototype Evaluation — Please rate each statement</div>
+        <div class="section-title" data-en="Usability and Interaction Experience" data-de="Benutzbarkeit und Interaktionserfahrung">Usability and Interaction Experience</div>
       </div>
       <div class="section-body">
-        <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;" data-en="1 = Strongly Disagree &nbsp;·&nbsp; 2 = Disagree &nbsp;·&nbsp; 3 = Neutral &nbsp;·&nbsp; 4 = Agree &nbsp;·&nbsp; 5 = Strongly Agree" data-de="1 = Stimme überhaupt nicht zu &nbsp;·&nbsp; 2 = Stimme nicht zu &nbsp;·&nbsp; 3 = Neutral &nbsp;·&nbsp; 4 = Stimme zu &nbsp;·&nbsp; 5 = Stimme voll zu">1 = Strongly Disagree &nbsp;·&nbsp; 2 = Disagree &nbsp;·&nbsp; 3 = Neutral &nbsp;·&nbsp; 4 = Agree &nbsp;·&nbsp; 5 = Strongly Agree</p>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;" data-en="1 = Strongly Disagree &nbsp;·&nbsp; 2 = Disagree &nbsp;·&nbsp; 3 = Agree &nbsp;·&nbsp; 4 = Strongly Agree" data-de="1 = Stimme überhaupt nicht zu &nbsp;·&nbsp; 2 = Stimme nicht zu &nbsp;·&nbsp; 3 = Stimme zu &nbsp;·&nbsp; 4 = Stimme voll zu">1 = Strongly Disagree &nbsp;·&nbsp; 2 = Disagree &nbsp;·&nbsp; 3 = Agree &nbsp;·&nbsp; 4 = Strongly Agree</p>
 
-        <div id="likert-wrap">
-        <!-- Desktop table -->
-        <table class="likert-table" id="likert-desktop" aria-label="Likert scale evaluation">
+        <div id="likert-wrap-a">
+        <table class="likert-table" id="likert-desktop-a" aria-label="Usability and interaction evaluation">
           <thead>
             <tr>
               <th class="col-stmt" data-en="Statement" data-de="Aussage">Statement</th>
-              <th data-en="1<br>Strongly<br>Disagree" data-de="1<br>Stimme gar<br>nicht zu">1<br><span style="font-weight:400;font-size:10px;" data-en="Strongly Disagree" data-de="Stimme gar nicht zu">Strongly Disagree</span></th>
-              <th>2<br><span style="font-weight:400;font-size:10px;" data-en="Disagree" data-de="Nicht zu">Disagree</span></th>
-              <th>3<br><span style="font-weight:400;font-size:10px;" data-en="Neutral" data-de="Neutral">Neutral</span></th>
-              <th>4<br><span style="font-weight:400;font-size:10px;" data-en="Agree" data-de="Stimme zu">Agree</span></th>
-              <th>5<br><span style="font-weight:400;font-size:10px;" data-en="Strongly Agree" data-de="Voll zu">Strongly Agree</span></th>
+              <th data-en="1<br>Strongly<br>Disagree" data-de="1<br>Stimme überhaupt<br>nicht zu">1<br><span style="font-weight:400;font-size:10px;" data-en="Strongly Disagree" data-de="Stimme überhaupt nicht zu">Strongly Disagree</span></th>
+              <th>2<br><span style="font-weight:400;font-size:10px;" data-en="Disagree" data-de="Stimme nicht zu">Disagree</span></th>
+              <th>3<br><span style="font-weight:400;font-size:10px;" data-en="Agree" data-de="Stimme zu">Agree</span></th>
+              <th>4<br><span style="font-weight:400;font-size:10px;" data-en="Strongly Agree" data-de="Stimme voll zu">Strongly Agree</span></th>
             </tr>
           </thead>
-          <tbody id="likert-body">
-          </tbody>
+          <tbody id="likert-body-a"></tbody>
         </table>
-        </div>
-        <div class="field-error" id="err-likert" style="margin-top:10px;">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
-          <span data-en="Please rate all statements above." data-de="Bitte bewerten Sie alle obigen Aussagen.">Please rate all statements above.</span>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 3: Open-ended -->
+    <!-- SECTION 3: Safety Assessment -->
     <div class="section-card" id="sec3">
       <div class="section-header">
         <div class="section-num">3</div>
+        <div class="section-title" data-en="Safety Assessment and Decision-Support Evaluation" data-de="Sicherheitsbewertung und Entscheidungsunterstützung">Safety Assessment and Decision-Support Evaluation</div>
+      </div>
+      <div class="section-body">
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;" data-en="1 = Strongly Disagree &nbsp;·&nbsp; 2 = Disagree &nbsp;·&nbsp; 3 = Agree &nbsp;·&nbsp; 4 = Strongly Agree" data-de="1 = Stimme überhaupt nicht zu &nbsp;·&nbsp; 2 = Stimme nicht zu &nbsp;·&nbsp; 3 = Stimme zu &nbsp;·&nbsp; 4 = Stimme voll zu">1 = Strongly Disagree &nbsp;·&nbsp; 2 = Disagree &nbsp;·&nbsp; 3 = Agree &nbsp;·&nbsp; 4 = Strongly Agree</p>
+
+        <div id="likert-wrap">
+        <table class="likert-table" id="likert-desktop-b" aria-label="Safety and decision-support evaluation">
+          <thead>
+            <tr>
+              <th class="col-stmt" data-en="Statement" data-de="Aussage">Statement</th>
+              <th data-en="1<br>Strongly<br>Disagree" data-de="1<br>Stimme überhaupt<br>nicht zu">1<br><span style="font-weight:400;font-size:10px;" data-en="Strongly Disagree" data-de="Stimme überhaupt nicht zu">Strongly Disagree</span></th>
+              <th>2<br><span style="font-weight:400;font-size:10px;" data-en="Disagree" data-de="Stimme nicht zu">Disagree</span></th>
+              <th>3<br><span style="font-weight:400;font-size:10px;" data-en="Agree" data-de="Stimme zu">Agree</span></th>
+              <th>4<br><span style="font-weight:400;font-size:10px;" data-en="Strongly Agree" data-de="Stimme voll zu">Strongly Agree</span></th>
+            </tr>
+          </thead>
+          <tbody id="likert-body-b"></tbody>
+        </table>
+        </div>
+        <div class="field-error" id="err-likert" style="margin-top:10px;">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
+          <span data-en="Please rate all statements in Sections 2 and 3." data-de="Bitte bewerten Sie alle Aussagen in Abschnitt 2 und 3.">Please rate all statements in Sections 2 and 3.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Open-ended -->
+    <div class="section-card" id="sec4">
+      <div class="section-header">
+        <div class="section-num">4</div>
         <div class="section-title" data-en="Open-Ended Feedback" data-de="Offene Rückmeldungen">Open-Ended Feedback</div>
       </div>
       <div class="section-body">
@@ -815,10 +894,10 @@
       </div>
     </div>
 
-    <!-- SECTION 4: Overall Rating -->
-    <div class="section-card" id="sec4">
+    <!-- SECTION 5: Overall Rating -->
+    <div class="section-card" id="sec5">
       <div class="section-header">
-        <div class="section-num">4</div>
+        <div class="section-num">5</div>
         <div class="section-title" data-en="Overall Rating" data-de="Gesamtbewertung">Overall Rating</div>
       </div>
       <div class="section-body">
@@ -872,6 +951,15 @@
     </div>
     <h2 data-en="Thank you for your response!" data-de="Vielen Dank für Ihre Antwort!">Thank you for your response!</h2>
     <p data-en="Your feedback has been recorded and will contribute to Kumar Viswajeet's evaluation of the chatbot prototype as part of an MSc Artificial Intelligence dissertation. Your responses are fully anonymised." data-de="Ihr Feedback wurde gespeichert und trägt zu Kumar Viswajeets Bewertung des Chatbot-Prototyps im Rahmen einer MSc-Dissertation im Bereich Künstliche Intelligenz bei. Ihre Antworten sind vollständig anonymisiert.">Your feedback has been recorded and will contribute to Kumar Viswajeet's evaluation of the chatbot prototype as part of an MSc Artificial Intelligence dissertation. Your responses are fully anonymised.</p>
+    <div class="success-share" id="success-share">
+      <div class="success-share-title" data-en="Share This Questionnaire" data-de="Diesen Fragebogen teilen">Share This Questionnaire</div>
+      <p class="success-share-text" data-en="If useful, you can share it with your college or share the link directly." data-de="Wenn hilfreich, können Sie ihn mit Ihrer Hochschule teilen oder den Link direkt weitergeben.">If useful, you can share it with your college or share the link directly.</p>
+      <div class="success-share-actions">
+        <button type="button" class="btn-share btn-share-primary" id="btn-share-college" data-en="Share with College (Email)" data-de="Mit Hochschule teilen (E-Mail)">Share with College (Email)</button>
+        <button type="button" class="btn-share btn-share-secondary" id="btn-share-link" data-en="Share Link" data-de="Link teilen">Share Link</button>
+      </div>
+      <div class="share-status" id="share-status" aria-live="polite"></div>
+    </div>
   </div>
 
 </main>
@@ -883,7 +971,8 @@
 </footer>
 
 <script>
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwqq1sI8KzjJmPscjZg3Tukqo4N94FKCor4vPEwqvNZsiVVmQ7iUKFTeXh-8oTmienN/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwS4TdtxAlezDDjVuXulkR5-Idf5wu-iXp1acM8NzIa_Z7N2WmkEmz2uXCIyYmeTDpo/exec';
+const SHARE_URL_FALLBACK = 'https://kv8936.github.io/kv-chatbot/';
 
 // ─────────────────────────────────────────────
 // LIKERT STATEMENTS
@@ -914,6 +1003,21 @@ const likertItems = [
 const starLabels = {
   en: { 1: 'Not useful at all', 2: 'Slightly useful', 3: 'Moderately useful', 4: 'Very useful', 5: 'Extremely useful' },
   de: { 1: 'Überhaupt nicht nützlich', 2: 'Wenig nützlich', 3: 'Mäßig nützlich', 4: 'Sehr nützlich', 5: 'Äußerst nützlich' }
+};
+
+const shareStatusText = {
+  en: {
+    copied: 'Link copied to clipboard.',
+    shared: 'Share dialog opened.',
+    email: 'Email app opened with draft message.',
+    failed: 'Could not share automatically. Please copy the link manually.'
+  },
+  de: {
+    copied: 'Link in die Zwischenablage kopiert.',
+    shared: 'Teilen-Dialog geöffnet.',
+    email: 'E-Mail-App mit Entwurf geöffnet.',
+    failed: 'Automatisches Teilen nicht möglich. Bitte Link manuell kopieren.'
+  }
 };
 
 // ─────────────────────────────────────────────
@@ -950,15 +1054,113 @@ function setLang(lang) {
   document.getElementById('btn-de').classList.toggle('active', lang === 'de');
   document.getElementById('btn-en').setAttribute('aria-pressed', lang === 'en');
   document.getElementById('btn-de').setAttribute('aria-pressed', lang === 'de');
+
+  const shareStatus = document.getElementById('share-status');
+  if (shareStatus) shareStatus.textContent = '';
+}
+
+function getShareUrl() {
+  if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+    return window.location.href.split('#')[0];
+  }
+  return SHARE_URL_FALLBACK;
+}
+
+function getSharePayload() {
+  const url = getShareUrl();
+  if (currentLang === 'de') {
+    return {
+      title: 'MSc-KI-Fragebogen zur Chatbot-Bewertung',
+      text: 'Bitte sehen Sie sich diesen Forschungsfragebogen zur Bewertung eines Sicherheits-Chatbots an.',
+      url
+    };
+  }
+  return {
+    title: 'MSc AI Questionnaire for Chatbot Evaluation',
+    text: 'Please review this research questionnaire for evaluating a workplace safety chatbot prototype.',
+    url
+  };
+}
+
+function setShareStatus(key) {
+  const el = document.getElementById('share-status');
+  if (!el) return;
+  el.textContent = (shareStatusText[currentLang] && shareStatusText[currentLang][key]) || '';
+}
+
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.setAttribute('readonly', '');
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  const copied = document.execCommand('copy');
+  document.body.removeChild(ta);
+  return copied;
+}
+
+function setupShareActions() {
+  const btnEmail = document.getElementById('btn-share-college');
+  const btnLink = document.getElementById('btn-share-link');
+
+  if (btnEmail) {
+    btnEmail.addEventListener('click', () => {
+      const payload = getSharePayload();
+      const subject = currentLang === 'de'
+        ? 'MSc-KI-Fragebogen zur Bewertung eines Sicherheits-Chatbots'
+        : 'MSc AI questionnaire for workplace safety chatbot evaluation';
+      const body = currentLang === 'de'
+        ? 'Ich teile diesen akademischen Fragebogen zur Chatbot-Bewertung.\n\n' + payload.url
+        : 'I am sharing this academic questionnaire for chatbot evaluation.\n\n' + payload.url;
+
+      window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      setShareStatus('email');
+    });
+  }
+
+  if (btnLink) {
+    btnLink.addEventListener('click', async () => {
+      const payload = getSharePayload();
+
+      if (navigator.share) {
+        try {
+          await navigator.share(payload);
+          setShareStatus('shared');
+          return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;
+        }
+      }
+
+      const copied = await copyText(payload.url);
+      setShareStatus(copied ? 'copied' : 'failed');
+    });
+  }
 }
 
 // ─────────────────────────────────────────────
 // BUILD LIKERT TABLE
 // ─────────────────────────────────────────────
 function buildLikert() {
-  const tbody = document.getElementById('likert-body');
-  tbody.innerHTML = '';
+  const tbodyA = document.getElementById('likert-body-a');
+  const tbodyB = document.getElementById('likert-body-b');
+  tbodyA.innerHTML = '';
+  tbodyB.innerHTML = '';
+
   likertItems.forEach((item, i) => {
+    const targetBody = i < 7 ? tbodyA : tbodyB;
     const qNum = 'Q' + (i + 4);
     const enText = qNum + '. ' + item.en;
     const deText = qNum + '. ' + item.de;
@@ -969,7 +1171,7 @@ function buildLikert() {
     tdStmt.setAttribute('data-de', deText);
     tdStmt.textContent = (currentLang === 'de' ? deText : enText);
     tr.appendChild(tdStmt);
-    for (let v = 1; v <= 5; v++) {
+    for (let v = 1; v <= 4; v++) {
       const td = document.createElement('td');
       const input = document.createElement('input');
       input.type = 'radio';
@@ -980,7 +1182,7 @@ function buildLikert() {
       td.appendChild(input);
       tr.appendChild(td);
     }
-    tbody.appendChild(tr);
+    targetBody.appendChild(tr);
   });
 }
 
@@ -1010,6 +1212,13 @@ function updateProgress() {
   document.getElementById('progress-fill').style.width = pct + '%';
   document.getElementById('progress-label').textContent = pct + '%';
   document.querySelector('.progress-wrap').setAttribute('aria-valuenow', pct);
+
+  // Hide consent error as soon as user checks the box.
+  const consentCb = document.getElementById('consent-cb');
+  const consentErr = document.getElementById('err-consent');
+  if (consentCb && consentErr && consentCb.checked) {
+    consentErr.classList.remove('visible');
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -1138,6 +1347,7 @@ document.getElementById('survey-form').addEventListener('submit', async function
 buildLikert();
 setLang(currentLang);
 updateProgress();
+setupShareActions();
 </script>
 </body>
 </html>
