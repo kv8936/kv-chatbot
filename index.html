@@ -208,6 +208,53 @@
     text-decoration: none;
     transition: background 0.2s;
   }
+  .hero-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .guide-video-panel {
+    width: 100%;
+    max-width: 760px;
+    margin: 16px auto 0;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--radius);
+    padding: 14px;
+    text-align: left;
+  }
+  .guide-video-title {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    letter-spacing: 0.2px;
+  }
+  .guide-video-help {
+    color: rgba(255,255,255,0.75);
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .guide-video-player {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    background: #020617;
+  }
+  .guide-video-fallback {
+    color: #bfdbfe;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+  .guide-video-fallback a {
+    color: #93c5fd;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .guide-video-fallback a:hover { text-decoration: underline; }
   .chatbot-link-box:hover { background: rgba(255,255,255,0.14); }
   .chatbot-link-box svg { flex-shrink: 0; }
 
@@ -623,10 +670,25 @@
   <div class="hero-eyebrow" data-en="Academic Research · Anonymised" data-de="Akademische Forschung · Anonymisiert">Academic Research · Anonymised</div>
   <h1 data-en="Usability Evaluation Questionnaire for the Chatbot Prototype" data-de="Usability-Evaluierungsfragebogen für den Chatbot-Prototyp">Usability Evaluation Questionnaire for the Chatbot Prototype</h1>
   <p class="hero-sub" data-en="This questionnaire is part of an MSc Artificial Intelligence dissertation evaluating the usability and decision-support capability of a chatbot prototype. Responses will be anonymised and used only for academic analysis." data-de="Dieser Fragebogen ist Teil einer MSc-Dissertation im Bereich Künstliche Intelligenz und bewertet die Benutzerfreundlichkeit und Entscheidungsunterstützung eines Chatbot-Prototyps. Alle Antworten werden anonymisiert und nur für akademische Analysen verwendet.">This questionnaire is part of an MSc Artificial Intelligence dissertation evaluating the usability and decision-support capability of a chatbot prototype. Responses will be anonymised and used only for academic analysis.</p>
-  <a href="https://hazard-chatbot.rayports.com/" class="chatbot-link-box" id="chatbot-link" target="_blank" rel="noopener">
-    <svg width="16" height="16" fill="none" stroke="#93c5fd" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    <span data-en="Open the Chatbot Prototype to complete test scenarios" data-de="Öffnen Sie den Chatbot-Prototypen, um Testszenarien durchzuführen">Open the Chatbot Prototype to complete test scenarios</span>
-  </a>
+  <div class="hero-links">
+    <a href="https://hazard-chatbot.rayports.com/" class="chatbot-link-box" id="chatbot-link" target="_blank" rel="noopener">
+      <svg width="16" height="16" fill="none" stroke="#93c5fd" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      <span data-en="Open the Chatbot Prototype to complete test scenarios" data-de="Öffnen Sie den Chatbot-Prototypen, um Testszenarien durchzuführen">Open the Chatbot Prototype to complete test scenarios</span>
+    </a>
+    <a href="Video/Demo_Guide.mp4" class="chatbot-link-box" id="guide-video-link" target="_blank" rel="noopener">
+      <svg width="16" height="16" fill="none" stroke="#93c5fd" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <span data-en="Open the Guide Video (How to use the chatbot)" data-de="Öffnen Sie das Anleitungsvideo (So nutzen Sie den Chatbot)">Open the Guide Video (How to use the chatbot)</span>
+    </a>
+  </div>
+  <div class="guide-video-panel" role="region" aria-label="Guide video panel">
+    <div class="guide-video-title" data-en="Guide Video" data-de="Anleitungsvideo">Guide Video</div>
+    <p class="guide-video-help" data-en="Watch this short guide before you test the chatbot prototype." data-de="Sehen Sie sich dieses kurze Anleitungsvideo an, bevor Sie den Chatbot-Prototyp testen.">Watch this short guide before you test the chatbot prototype.</p>
+    <video class="guide-video-player" controls preload="metadata" playsinline>
+      <source src="Video/Demo_Guide.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+    <p class="guide-video-fallback" data-en="If the embedded player does not open, use the Guide Video link above." data-de="Wenn der eingebettete Player nicht funktioniert, nutzen Sie den Anleitungsvideo-Link oben.">If the embedded player does not open, use the Guide Video link above.</p>
+  </div>
   <div class="hero-meta" data-en="University Dissertation · Kumar Viswajeet · Supervisor: Dr Vincent English · Subject: MSc Artificial Intelligence · Institution: Berlin School of Business and Innovation (BSBI), Berlin, Germany" data-de="Universitätsdissertation · Kumar Viswajeet · Betreuer: Dr Vincent English · Studiengang: MSc Künstliche Intelligenz · Institution: Berlin School of Business and Innovation (BSBI), Berlin, Deutschland">University Dissertation · Kumar Viswajeet · Supervisor: Dr Vincent English · Subject: MSc Artificial Intelligence · Institution: Berlin School of Business and Innovation (BSBI), Berlin, Germany</div>
 </div>
 
@@ -635,7 +697,7 @@
   <!-- CONSENT -->
   <div class="consent-banner" role="note">
     <svg width="18" height="18" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>
-    <p data-en="Please access the chatbot prototype using the link above, complete the provided test scenarios, and then answer the questionnaire based on your experience." data-de="Bitte öffnen Sie den Chatbot-Prototypen über den Link oben, führen Sie die vorgesehenen Testszenarien durch und beantworten Sie anschließend den Fragebogen basierend auf Ihrer Erfahrung.">Please access the chatbot prototype using the link above, complete the provided test scenarios, and then answer the questionnaire based on your experience.</p>
+    <p data-en="Please watch the guide video above and use the links to access the chatbot prototype, complete the provided test scenarios, and then answer the questionnaire based on your experience." data-de="Bitte sehen Sie sich das obige Anleitungsvideo an und nutzen Sie die Links, um den Chatbot-Prototypen zu öffnen, führen Sie die vorgesehenen Testszenarien durch und beantworten Sie anschließend den Fragebogen basierend auf Ihrer Erfahrung.">Please watch the guide video above and use the links to access the chatbot prototype, complete the provided test scenarios, and then answer the questionnaire based on your experience.</p>
   </div>
 
   <div class="institution-note" role="note">
